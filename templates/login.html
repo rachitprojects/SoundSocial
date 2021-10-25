@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{%static 'css/btpcss.css' %}">
 </head>
 <body>
-    <section class="header">
+    <section>
         <nav>
 
             <div class="nav-links">
@@ -27,13 +27,37 @@
                 </ul>
             </div>
         </nav>
-    <div class="text-box">
+    <!-- <div class="text-box">
         <h1>Sound Social</h1>
         <p>This new age sound sharing websites enables us to connect blah blah blah and goes on and on and on forever!</p>
         <a href="" class="hero-btn">   Get  Started !  </a>
-    </div>
-    </section>>
+    </div> -->
+    </section>
     <!-----------------------------login/signup---------------------------------------->
+    <div class="login">
+<form id="login" method="get" action="login.php">
+    <label><b>User Name
+    </b>
+    </label>
+    <input type="text" name="Uname" id="Uname" placeholder="Username">
+    <br><br>
+    <label><b>Password
+    </b>
+    </label>
+    <input type="Password" name="Pass" id="Pass" placeholder="Password">
+    <br><br>
+    <input type="button" name="log" id="log" value="Log In Here">
+    <br><br>
+    <input type="checkbox" id="check">
+    <span>Remember me</span>
+    <br><br>
+    Forgot <a href="#">Password</a>
+</form>
+</div>
+
+
+
+
 
 </body>
 </html>
