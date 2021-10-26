@@ -8,7 +8,7 @@
   <body>
 
 
-<form id="login" method="get" action="login.php">
+<!-- <form id="login" method="post" action="/signup">
     <label>
       <b>User Name</b>
     </label>
@@ -24,7 +24,7 @@
     <label>
       <b>Last Name</b>
     </label>
-      <input type="text" name="first_name" value="">
+      <input type="text" name="last_name" value="">
       <br><br>
 
     <label>
@@ -42,11 +42,15 @@
     <input type="Submit" name="log" id="log" value="Sign Up Here">
     <br><br>
 
-    <input type="checkbox" id="check">
-    <span>Remember me</span>
-    <br><br>
-</form>
+    <!-- <input type="checkbox" id="check">
+    <span>Remember me</span> -->
+    <!-- <br><br> -->
 
+<form id="signup" action="/signup" method="POST">
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" value="submit">
+</form>
 
 </body>
 
