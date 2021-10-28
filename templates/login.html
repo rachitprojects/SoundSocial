@@ -35,7 +35,7 @@
     </section>
     <!-----------------------------login/signup---------------------------------------->
     <div class="login">
-<form id="login" method="get" action="login.php">
+<!-- <form id="login" method="get" action="login.php">
     <label><b>User Name
     </b>
     </label>
@@ -52,7 +52,14 @@
     <span>Remember me</span>
     <br><br>
     Forgot <a href="#">Password</a>
-</form>
+</form> -->
+
+    <form id="login" action="/login" method="POST">
+        {% csrf_token %}
+        {{error_message}}
+        {{form.as_p}}
+        <input type="submit" name="" value="Log In Here">
+    </form>
 </div>
 
 

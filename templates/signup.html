@@ -48,6 +48,7 @@
 
 <form id="signup" action="/signup" method="POST">
   {% csrf_token %}
+  {{error_message}}
   {{form.as_p}}
   <input type="submit" value="submit">
 </form>
