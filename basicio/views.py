@@ -20,8 +20,21 @@ def thanks(request):
     return render(request, "thanks.html")
 
 def login(request):
-    form = LoginForm()
-    return render(request, "login.html", {"form":form})
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["uname"]
+            password = form.cleaned_data["password"]
+
+            user_obj = User.objects.get(username=username, passwd=password)
+            if user_obj:
+                print("Thanks for logging in")
+                return redirect("/")
+            else:
+                return render(request, "login.html", {"form":form, "error_message":"Incorrect Username or Password"})
+    else:
+        form = LoginForm()
+        return render(request, "login.html", {"form":form})
 
 def signup(request):
     if request.method == "POST":
