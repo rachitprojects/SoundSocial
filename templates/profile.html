@@ -13,7 +13,7 @@
 </head>
 <body>
 
-        <div class="container">
+        <!-- <div class="container">
             <div class="card">
                 <div class="head">
 
@@ -74,7 +74,33 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+
+        <p>
+          Hi {{username}} , Welcome to SoundSocial , Socialize through Sound today
+        </p>
+<br><br>
+        <p>
+          Upload file here
+
+            <form class="" action="/upload" method="POST">
+                {% csrf_token %}
+                {{form}}
+            </form>
+            
+        </p>
+        <br><br>
+        <p>
+          Here are the hubs you belong to
+        </p>
+        <br><br>
+        <p>
+          Here are the sound notes you uploaded
+        </p>
+        <br><br>
+        <p>
+          Hub Recommendations
+        </p>
 
     </body>
     </html>

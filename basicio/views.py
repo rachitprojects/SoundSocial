@@ -13,8 +13,13 @@ def index(request):
 def about(request):
     return render(request, "about.html")
 
+# Not yet implemented link change
 def profile(request):
-    return render(request, "profile.html")
+    # .POST.iterlists()
+    data = dict(request.POST)
+    # print(profile["uname"])
+    # print(profile["password"])
+    return render(request, "profile.html", {"username":data["uname"][0]})
 
 def thanks(request):
     return render(request, "thanks.html")
@@ -29,7 +34,7 @@ def login(request):
             user_obj = User.objects.get(username=username, passwd=password)
             if user_obj:
                 print("Thanks for logging in")
-                return redirect("/")
+                return profile(request)
             else:
                 return render(request, "login.html", {"form":form, "error_message":"Incorrect Username or Password"})
     else:
@@ -37,12 +42,13 @@ def login(request):
         return render(request, "login.html", {"form":form})
 
 def signup(request):
+    print(request.headers)
     if request.method == "POST":
         form = SignUpForm(request.POST)
+        print("here")
         if form.is_valid():
             if User.objects.filter(username=form.cleaned_data["uname"]).count() > 0:
                 print(form.cleaned_data["uname"])
-                print("here")
                 return render(request, "signup.html", {'form':form, 'error_message':"Username Exists"})
             else:
                 temp_user = User()
