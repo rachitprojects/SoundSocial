@@ -3,7 +3,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .forms import SignUpForm, LoginForm
-from basicio.models import User
+from basicio.models import User, Hubuser
 from datetime import datetime
 
 
@@ -13,13 +13,20 @@ def index(request):
 def about(request):
     return render(request, "about.html")
 
+
 # Not yet implemented link change
 def profile(request):
     # .POST.iterlists()
-    data = dict(request.POST)
+    # data = dict(request.POST)
     # print(profile["uname"])
     # print(profile["password"])
-    return render(request, "profile.html", {"username":data["uname"][0]})
+
+    data = request.COOKIES['user']
+    hubUsers = Hubuser.objects.select_related('userid', 'hubid')
+    hubs = [hub.hubid.hubname for hub in hubUsers if hub.userid.username == data]
+    print(hubs)
+    # return render(request, "profile.html", {"username":data["uname"][0]})
+    return render(request, "profile.html", {"username":data})
 
 def thanks(request):
     return render(request, "thanks.html")
@@ -34,6 +41,7 @@ def login(request):
             user_obj = User.objects.get(username=username, passwd=password)
             if user_obj:
                 print("Thanks for logging in")
+                request.COOKIES['user'] = username
                 return profile(request)
             else:
                 return render(request, "login.html", {"form":form, "error_message":"Incorrect Username or Password"})

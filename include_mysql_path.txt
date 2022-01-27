@@ -1,1 +1,8 @@
+
+Make sure you have installed mysql before hand 
+Also make sure you have mysqlclient
+
 export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$PATH"
+
+if clang unavailable : 
+export ARCHFLAGS="-arch x86_64"
