@@ -87,11 +87,16 @@
                 {% csrf_token %}
                 {{form}}
             </form>
-            
+
         </p>
         <br><br>
         <p>
           Here are the hubs you belong to
+          <ul>
+            {% for hub in hubs %}
+                <li> <a href="/hub/{{hub}}"> {{hub}} </a>  </li>
+            {% endfor %}
+          </ul>
         </p>
         <br><br>
         <p>

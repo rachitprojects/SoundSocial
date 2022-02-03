@@ -13,6 +13,11 @@ def index(request):
 def about(request):
     return render(request, "about.html")
 
+def hub(request, slug):
+    return render(request, "hub.html", {"hubName":slug})
+
+def createHub(request):
+    pass
 
 # Not yet implemented link change
 def profile(request):
@@ -26,7 +31,7 @@ def profile(request):
     hubs = [hub.hubid.hubname for hub in hubUsers if hub.userid.username == data]
     print(hubs)
     # return render(request, "profile.html", {"username":data["uname"][0]})
-    return render(request, "profile.html", {"username":data})
+    return render(request, "profile.html", {"username":data, "hubs":hubs})
 
 def thanks(request):
     return render(request, "thanks.html")
