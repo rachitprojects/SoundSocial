@@ -15,6 +15,9 @@ class SignUpForm(forms.Form):
     emailId = forms.EmailField(label="Enter Email ID")
 
 class LoginForm(forms.Form):
-
     uname = forms.CharField(label="Username", max_length=100)
     password = forms.CharField(label="Enter Password", widget=forms.PasswordInput())
+
+class CreateHubForm(forms.Form):
+    hubname = forms.CharField(label="hubname", max_length=50)
+    hubdesc = forms.CharField(label="hubdesc", max_length=300)

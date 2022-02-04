@@ -2,7 +2,7 @@
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from .forms import SignUpForm, LoginForm
+from .forms import SignUpForm, LoginForm, CreateHubForm
 from basicio.models import User, Hubuser
 from datetime import datetime
 
@@ -17,7 +17,10 @@ def hub(request, slug):
     return render(request, "hub.html", {"hubName":slug})
 
 def createHub(request):
-    pass
+    if request.method == "POST":
+        createHubForm = CreateHubForm(request.POST)
+
+
 
 # Not yet implemented link change
 def profile(request):
