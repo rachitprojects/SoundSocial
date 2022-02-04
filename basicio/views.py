@@ -1,9 +1,8 @@
 
-
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .forms import SignUpForm, LoginForm, CreateHubForm
-from basicio.models import User, Hubuser
+from basicio.models import User, Hubuser, Hub
 from datetime import datetime
 
 
@@ -14,13 +13,28 @@ def about(request):
     return render(request, "about.html")
 
 def hub(request, slug):
+    print(request.COOKIES['user'])
     return render(request, "hub.html", {"hubName":slug})
 
 def createHub(request):
     if request.method == "POST":
-        createHubForm = CreateHubForm(request.POST)
-
-
+        form = CreateHubForm(request.POST)
+        if form.is_valid():
+            hubName = form.cleaned_data["hubname"]
+            if Hub.objects.filter(hubname=hubName).count() > 0:
+                return render(request, "create_hub.html", {"form":createHubForm, "error_message":"The Hub Name already Exists"})
+            else:
+                hubDesc = form.cleaned_data["hubdesc"]
+                creator = request.COOKIES['user']
+                hub = Hub()
+                hub.hubname = hubName
+                hub.hubdesc = hubDesc
+                hub.creator = creator
+                hub.save()
+                return redirect("/thanks")
+    else:
+        form = CreateHubForm()
+        return render(request, "create_hub.html", {"form":form})
 
 # Not yet implemented link change
 def profile(request):
@@ -49,8 +63,11 @@ def login(request):
             user_obj = User.objects.get(username=username, passwd=password)
             if user_obj:
                 print("Thanks for logging in")
-                request.COOKIES['user'] = username
-                return profile(request)
+                # request.COOKIES['user'] = username
+                # request.set_cookie('user', username)
+                profile_redirect = HttpResponseRedirect("/profile")
+                profile_redirect.set_cookie("user", username)
+                return profile_redirect
             else:
                 return render(request, "login.html", {"form":form, "error_message":"Incorrect Username or Password"})
     else:

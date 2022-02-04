@@ -12,7 +12,8 @@ class Hub(models.Model):
     hubid = models.IntegerField(db_column='hubID', primary_key=True)  # Field name made lowercase.
     hubname = models.CharField(db_column='hubName', max_length=50)  # Field name made lowercase.
     hubdesc = models.CharField(db_column='hubDesc', max_length=300)  # Field name made lowercase.
-    creator = models.IntegerField()
+    # creator = models.IntegerField()
+    creator = models.CharField(db_column="creator", max_length=50)
     pic_link = models.CharField(max_length=150, blank=True, null=True)
 
     class Meta:

@@ -9,5 +9,6 @@ urlpatterns = [
     path('profile', views.profile, name="profile"),
     path('signup', views.signup, name="signup"),
     path('thanks', views.thanks, name="thanks"),
-    path('hub/<slug:slug>', views.hub, name="hub")
+    path('hub/<slug:slug>', views.hub, name="hub"),
+    path('createhub', views.createHub, name="createHub")
 ]
